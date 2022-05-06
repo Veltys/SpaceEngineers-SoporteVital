@@ -1,4 +1,4 @@
-﻿using Sandbox.ModAPI.Ingame;
+using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
 using SpaceEngineers.Game.ModAPI.Ingame;
 using VRageMath;
@@ -8,7 +8,7 @@ using VRageMath;
 /// <summary>Small vital support room manager script for Space Engineers game</summary>
 /// <author>Veltys</author>
 /// <date>2022-05-06</date>
-/// <version>1.0.0</version>
+/// <version>1.0.1</version>
 /// <note>Made just for internal use</note>
 
 
@@ -31,15 +31,16 @@ namespace ScriptingClass {
         private const bool _log = true;                                                     // Log changes to console and programmable block screens
 
         private const string _scriptName = "Soporte vital mgr.";                            // Script name
-        private const string _scriptVersion = "1.0.0";                                      // Script version
+        private const string _scriptVersion = "1.0.1";                                      // Script version
 
         private string _logText;                                                            // Log text container
         readonly private string _nameAirVent, _nameButtonPannels, _nameEngines,             // Various names (formely described)
             _nameGasGenerators, _nameLights, _nameReactors, _nameTanksH2, _nameTanksO2;
 
-        Color colourCyan, colourGreen, colourRed, colourWhite, colourYellow;                // Various colours (formely described) 
+        public readonly Color colourCyan, colourGreen, colourRed, colourWhite,              // Various colours (formely described) 
+            colourYellow;
 
-        private List<IMyTextSurface> _screens;                                              // Screens list
+        private readonly List<IMyTextSurface> _screens;                                              // Screens list
 
 
         /// <summary>
