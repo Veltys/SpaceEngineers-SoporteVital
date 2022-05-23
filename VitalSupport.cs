@@ -8,7 +8,7 @@ using VRageMath;
 /// <summary>Small vital support room manager script for Space Engineers game</summary>
 /// <author>Veltys</author>
 /// <date>2022-05-23</date>
-/// <version>1.2.0</version>
+/// <version>1.2.1</version>
 /// <note>Made just for internal use</note>
 
 
@@ -29,10 +29,10 @@ namespace ScriptingClass {
         // Start copying to game after this text
 
 
-        private const bool _log = true;                                                     // Log changes to console and programmable block screens
+        private readonly bool _log = true;                                                  // Log changes to console and programmable block screens
 
         private const string _scriptName = "Soporte vital mgr.";                            // Script name
-        private const string _scriptVersion = "1.2.0";                                      // Script version
+        private const string _scriptVersion = "1.2.1";                                      // Script version
 
         private string _logText;                                                            // Log text container
         readonly private string _nameAirVent, _nameButtonPannels, _nameEngines,             // Various names (formely described)
@@ -375,25 +375,25 @@ namespace ScriptingClass {
                     airVent = (IMyAirVent) GridTerminalSystem.GetBlockWithName(_nameAirVent);
                 }
                 if(_nameButtonPannels != "") {                                              // Getting button pannels group
-                    GridTerminalSystem.GetBlockGroupWithName(_nameButtonPannels).GetBlocksOfType<IMyTextSurfaceProvider>(buttonPanels);
+                    GridTerminalSystem.GetBlockGroupWithName(_nameButtonPannels)?.GetBlocksOfType<IMyTextSurfaceProvider>(buttonPanels);
                 }
                 if(_nameEngines != "") {                                                    // Getting engines group
-                    GridTerminalSystem.GetBlockGroupWithName(_nameEngines).GetBlocksOfType<IMyPowerProducer>(engines);
+                    GridTerminalSystem.GetBlockGroupWithName(_nameEngines)?.GetBlocksOfType<IMyPowerProducer>(engines);
                 }
                 if(_nameGasGenerators != "") {                                              // Getting H2O2 generators group
-                    GridTerminalSystem.GetBlockGroupWithName(_nameGasGenerators).GetBlocksOfType<IMyGasGenerator>(gasGenerators);
+                    GridTerminalSystem.GetBlockGroupWithName(_nameGasGenerators)?.GetBlocksOfType<IMyGasGenerator>(gasGenerators);
                 }
                 if(_nameLights != "") {                                                     // Getting lights group
-                    GridTerminalSystem.GetBlockGroupWithName(_nameLights).GetBlocksOfType<IMyLightingBlock>(lights);
+                    GridTerminalSystem.GetBlockGroupWithName(_nameLights)?.GetBlocksOfType<IMyLightingBlock>(lights);
                 }
                 if(_nameReactors != "") {                                                   // Getting reactors group
-                    GridTerminalSystem.GetBlockGroupWithName(_nameReactors).GetBlocksOfType<IMyReactor>(reactors);
+                    GridTerminalSystem.GetBlockGroupWithName(_nameReactors)?.GetBlocksOfType<IMyReactor>(reactors);
                 }
                 if(_nameTanksH2 != "") {                                                    // Getting H2 tanks group
-                    GridTerminalSystem.GetBlockGroupWithName(_nameTanksH2).GetBlocksOfType<IMyGasTank>(tanksH2);
+                    GridTerminalSystem.GetBlockGroupWithName(_nameTanksH2)?.GetBlocksOfType<IMyGasTank>(tanksH2);
                 }
                 if(_nameTanksO2 != "") {                                                    // Getting O2 tanks group
-                    GridTerminalSystem.GetBlockGroupWithName(_nameTanksO2).GetBlocksOfType<IMyGasTank>(tanksO2);
+                    GridTerminalSystem.GetBlockGroupWithName(_nameTanksO2)?.GetBlocksOfType<IMyGasTank>(tanksO2);
                 }
 
                 for(i = 0; i < lights.Count; i++) {                                         // Iterating lighgts so as to change them
@@ -404,27 +404,27 @@ namespace ScriptingClass {
                             }
                             break;
                         case "Engines":
-                            if(engines != null && engines[0] != null) {
+                            if(engines.Count > 0) {
                                 SetLight(lights[i], engines[0]);
                             }
                             break;
                         case "Generators":
-                            if(gasGenerators != null && gasGenerators[0] != null) {
+                            if(gasGenerators.Count > 0) {
                                 SetLight(lights[i], gasGenerators[0]);
                             }
                             break;
                         case "Reactors":
-                            if(reactors != null && reactors[0] != null) {
+                            if(reactors.Count > 0) {
                                 SetLight(lights[i], reactors[0]);
                             }
                             break;
                         case "TanksH2":
-                            if(tanksH2 != null && tanksH2[0] != null) {
+                            if(tanksH2.Count > 0) {
                                 SetLight(lights[i], tanksH2[0]);
                             }
                             break;
                         case "TanksO2":
-                            if(tanksO2 != null && tanksO2[0] != null) {
+                            if(tanksO2.Count > 0) {
                                 SetLight(lights[i], tanksO2[0]);
                             }
                             break;
@@ -435,23 +435,23 @@ namespace ScriptingClass {
                 }
 
                 if(buttonPanels.Count == 2) {
-                    if(tanksO2 != null && tanksO2[0] != null) {
-                        SetScreen(buttonPanels[1].GetSurface(0), tanksO2[0]);
-                    }
-                    if(tanksH2 != null && tanksH2[0] != null) {
-                        SetScreen(buttonPanels[1].GetSurface(1), tanksH2[0]);
-                    }
-                    if(gasGenerators != null && gasGenerators[0] != null) {
-                        SetScreen(buttonPanels[1].GetSurface(2), gasGenerators[0]);
-                    }
                     if(airVent != null) {
                         SetScreen(buttonPanels[1].GetSurface(3), airVent);
                     }
-                    if(reactors != null && reactors[0] != null) {
+                    if(engines.Count > 0) {
+                        SetScreen(buttonPanels[0].GetSurface(1), engines[0]);
+                    }
+                    if(gasGenerators.Count > 0) {
+                        SetScreen(buttonPanels[1].GetSurface(2), gasGenerators[0]);
+                    }
+                    if(reactors.Count > 0) {
                         SetScreen(buttonPanels[0].GetSurface(0), reactors[0]);
                     }
-                    if(engines != null && engines[0] != null) {
-                        SetScreen(buttonPanels[0].GetSurface(1), engines[0]);
+                    if(tanksH2.Count > 0) {
+                        SetScreen(buttonPanels[1].GetSurface(1), tanksH2[0]);
+                    }
+                    if(tanksO2.Count > 0) {
+                        SetScreen(buttonPanels[1].GetSurface(0), tanksO2[0]);
                     }
                 }
                 else {
