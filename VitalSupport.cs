@@ -7,8 +7,8 @@ using VRageMath;
 /// <file>Soporte vital.cs</file>
 /// <summary>Small vital support room manager script for Space Engineers game</summary>
 /// <author>Veltys</author>
-/// <date>2022-05-06</date>
-/// <version>1.1.0</version>
+/// <date>2022-05-23</date>
+/// <version>1.2.0</version>
 /// <note>Made just for internal use</note>
 
 
@@ -28,10 +28,11 @@ namespace ScriptingClass {
 
         // Start copying to game after this text
 
+
         private const bool _log = true;                                                     // Log changes to console and programmable block screens
 
         private const string _scriptName = "Soporte vital mgr.";                            // Script name
-        private const string _scriptVersion = "1.1.0";                                      // Script version
+        private const string _scriptVersion = "1.2.0";                                      // Script version
 
         private string _logText;                                                            // Log text container
         readonly private string _nameAirVent, _nameButtonPannels, _nameEngines,             // Various names (formely described)
@@ -40,7 +41,7 @@ namespace ScriptingClass {
         public readonly Color colourCyan, colourGreen, colourRed, colourWhite,              // Various colours (formely described) 
             colourYellow;
 
-        private readonly List<IMyTextSurface> _screens;                                              // Screens list
+        private readonly List<IMyTextSurface> _screens;                                     // Screens list
 
 
         /// <summary>
@@ -456,29 +457,23 @@ namespace ScriptingClass {
                 else {
                     _logText += "Grupo de paneles de botones inexistente o mal configurado" + Environment.NewLine;
                 }
-
-                if(_log) {                                                                  // If log system is active, main text will be shown on screen 0 (big one) and Script name, version and time will be shown on screen 1 (keyboard one)
-                    _screens[0].WriteText(_logText);
-                    _screens[1].WriteText(_scriptName + " v" + _scriptVersion + Environment.NewLine + DateTime.Now.ToString("HH:mm:ss"));
-
-                    _logText = _scriptName + " " + _scriptVersion + " @ " + DateTime.Now.ToString("HH:mm:ss") + ":" + Environment.NewLine + Environment.NewLine + _logText;
-
-                    Echo(_logText);
-                }
             }
             else {
                 if(_log) {                                                                  // If log system is active, main text will be shown on screen 0 (big one) and Script name, version and time will be shown on screen 1 (keyboard one)
                     _logText += "INFO: Ligts and panels variables empty" + Environment.NewLine + "or missconfigured. Cannot do anything.";
-
-                    _screens[0].WriteText(_logText);
-                    _screens[1].WriteText(_scriptName + " v" + _scriptVersion + Environment.NewLine + DateTime.Now.ToString("HH:mm:ss"));
-
-                    _logText = _scriptName + " " + _scriptVersion + " @ " + DateTime.Now.ToString("HH:mm:ss") + ":" + Environment.NewLine + Environment.NewLine + _logText;
-
-                    Echo(_logText);
                 }
             }
+
+            if(_log) {                                                                      // If log system is active, main text will be shown on screen 0 (big one) and Script name, version and time will be shown on screen 1 (keyboard one)
+                _screens[0].WriteText(_logText);
+                _screens[1].WriteText(_scriptName + " v" + _scriptVersion + Environment.NewLine + DateTime.Now.ToString("HH:mm:ss"));
+
+                _logText = _scriptName + " " + _scriptVersion + " @ " + DateTime.Now.ToString("HH:mm:ss") + ":" + Environment.NewLine + Environment.NewLine + _logText;
+
+                Echo(_logText);
+            }
         }
+
 
         // Stop copying to game before this text
     }
