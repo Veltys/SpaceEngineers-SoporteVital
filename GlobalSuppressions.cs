@@ -5,4 +5,5 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0090:Usar \"new(...)\"", Justification = "<pendiente>", Scope = "member", Target = "~M:ScriptingClass.SoporteVital.Main(System.String,Sandbox.ModAPI.Ingame.UpdateType)")]
+[assembly: SuppressMessage("Style", "IDE0060:Quitar el parámetro no utilizado", Justification = "<pendiente>", Scope = "member", Target = "~M:ScriptingClass.Program.Main(System.String,Sandbox.ModAPI.Ingame.UpdateType)")]
+[assembly: SuppressMessage("Style", "IDE0090:Usar \"new(...)\"", Justification = "<pendiente>", Scope = "member", Target = "~M:ScriptingClass.Program.Main(System.String,Sandbox.ModAPI.Ingame.UpdateType)")]

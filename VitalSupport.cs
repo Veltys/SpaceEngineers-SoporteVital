@@ -1,14 +1,15 @@
 ﻿using Sandbox.ModAPI.Ingame;
 using Sandbox.ModAPI.Interfaces;
 using SpaceEngineers.Game.ModAPI.Ingame;
+using VRage.Game.GUI.TextPanel;
 using VRageMath;
 
 
 /// <file>Soporte vital.cs</file>
 /// <summary>Small vital support room manager script for Space Engineers game</summary>
 /// <author>Veltys</author>
-/// <date>2022-05-23</date>
-/// <version>1.2.1</version>
+/// <date>2022-11-21</date>
+/// <version>1.2.2</version>
 /// <note>Made just for internal use</note>
 
 
@@ -21,10 +22,10 @@ namespace ScriptingClass {
     /// </summary>
     class Program {
         // Some stuff for avoiding some environment errors
-        IMyGridTerminalSystem? GridTerminalSystem = null;
-        IMyGridProgramRuntimeInfo? Runtime = null;
-        Action<string>? Echo = null;
-        IMyTerminalBlock? Me = null;
+        readonly IMyGridTerminalSystem? GridTerminalSystem = null;
+        readonly IMyGridProgramRuntimeInfo? Runtime = null;
+        readonly Action<string>? Echo = null;
+        readonly IMyTerminalBlock? Me = null;
 
         // Start copying to game after this text
 
@@ -32,7 +33,7 @@ namespace ScriptingClass {
         private readonly bool _log = true;                                                  // Log changes to console and programmable block screens
 
         private const string _scriptName = "Soporte vital mgr.";                            // Script name
-        private const string _scriptVersion = "1.2.1";                                      // Script version
+        private const string _scriptVersion = "1.2.2";                                      // Script version
 
         private string _logText;                                                            // Log text container
         readonly private string _nameAirVent, _nameButtonPannels, _nameEngines,             // Various names (formely described)
@@ -84,7 +85,7 @@ namespace ScriptingClass {
 
                 _screens[0].Alignment = TextAlignment.LEFT;
                 _screens[0].Font = "Monospace";
-                _screens[0].FontSize = 0.5f;
+                _screens[0].FontSize = 0.75f;
                 _screens[0].TextPadding = 2.0f;
 
                 _screens[1].Alignment = TextAlignment.CENTER;
